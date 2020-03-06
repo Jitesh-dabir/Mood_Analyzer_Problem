@@ -9,16 +9,16 @@ public class MoodAnalyzerTest {
     //TEST CASE TO CHECK SAD MOOD
     @Test
     public void givenMeassage_whenValid_thenReturnMood() {
-        String recentMood="I am in sad mood";
-        String reaction=mood.moodAnalyzer(recentMood);
+        MoodAnalyzer mood=new MoodAnalyzer("I am in sad mood");
+        String reaction=mood.moodAnalyzer();
         Assert.assertEquals("Sad",reaction);
     }
 
-    //TEST CASE TO CHECK HAPPYgit  MOOD
+    //TEST CASE TO CHECK HAPPY MOOD
     @Test
     public void givenMeassage_whenInvalid_thenReturnMood() {
-        String recentMood="I am in any mood";
-        String reaction=mood.moodAnalyzer(recentMood);
+        MoodAnalyzer mood=new MoodAnalyzer("I am in happy mood");
+        String reaction=mood.moodAnalyzer();
         Assert.assertEquals("Happy",reaction);
     }
 }
