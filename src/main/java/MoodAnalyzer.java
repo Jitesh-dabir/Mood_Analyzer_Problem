@@ -5,29 +5,27 @@ public class MoodAnalyzer {
     String message;
 
     //DEFAULT CONSTRUCTOR
-    MoodAnalyzer()
-    {
-        message="";
+    MoodAnalyzer() {
     }
+
     //PARAMETERIZED CONSTRUCTOR
-    MoodAnalyzer(String message)
-    {
-        this.message=message;
+    MoodAnalyzer(String message) {
+        this.message = message;
     }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Mood Analyzer Problem");
     }
 
     //METHOD THAT RETURN THE MOOD
     public String moodAnalyzer() {
-        if (message.contains("sad"))
-        {
-            mood="Sad";
+        try {
+            if (message.contains("sad"))
+                return "Sad";
+            else
+                return "Happy";
+        } catch(NullPointerException e) {
+            return "HappyNull";
         }
-        else if (message.contains("happy"))
-        {
-            mood="Happy";
-        }
-        return mood;
     }
 }
