@@ -1,6 +1,6 @@
 public class MoodAnalysisException extends Exception {
     enum MyException_Type{
-        NULL;
+        EMPTY,NULL;
     }
     MyException_Type type;
     MoodAnalysisException(MyException_Type type,String message) {
