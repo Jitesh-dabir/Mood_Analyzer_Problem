@@ -1,8 +1,7 @@
 public class MoodAnalyzer {
 
     //DECLARE VARIABLE
-    String mood;
-    String message;
+    private String message;
 
     //DEFAULT CONSTRUCTOR
     MoodAnalyzer() {
@@ -13,19 +12,19 @@ public class MoodAnalyzer {
         this.message = message;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MoodAnalysisException {
         System.out.println("Welcome to Mood Analyzer Problem");
     }
 
-    //METHOD THAT RETURN THE MOOD
-    public String moodAnalyzer() {
+    //METHOD THAT RETURN THE MOOD OR THROW EXCEPTION
+    public String moodAnalyzer() throws MoodAnalysisException {
         try {
             if (message.contains("sad"))
                 return "Sad";
             else
                 return "Happy";
         } catch(NullPointerException e) {
-            return "Happy";
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NULL,"You entered null,Please enter valid mood");
         }
     }
 }
