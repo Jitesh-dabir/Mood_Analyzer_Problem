@@ -2,13 +2,26 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory {
+
+    //RETURN CLASS OBJECT
+    public static Constructor<?> getConstructor(String className,Class param) throws MoodAnalysisException {
+        try {
+            Class<?> moodAnalyserClass = Class.forName(className);
+            return moodAnalyserClass.getConstructor(param);
+        } catch (ClassNotFoundException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS_FOUND, "No such class found");
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, "No such method found");
+        }
+    }
+
     public static MoodAnalyzer createMoodAnalyser() {
         try {
-            //returns class object
+            //RETURN CLASS OBJECT
             Class<?> moodAnalyzerClass = Class.forName("MoodAnalyzer");
-            // returns the constructor object
+            //RETURN CONSTRUCTOR OBJECT
             Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor();
-            //Constructor class is used to create a new instance of the class.
+            //CONSTRUCTOR CLASS IS USED TO CREATE A NEW INSTANCE OF CLASS
             Object instance = moodConstructor.newInstance();
             return (MoodAnalyzer) instance;
         } catch (ClassNotFoundException e) {

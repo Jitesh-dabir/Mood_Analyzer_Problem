@@ -1,6 +1,5 @@
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -52,7 +51,7 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void givenMoodAnalyserClassNameDefaultConstructor_Proper_ShouldReturnObject()  {
+    public void givenMoodAnalyserClassNameDefaultConstructor_WhenProper_ShouldReturnObject()  {
        try {
            MoodAnalyzer mood = new MoodAnalyzer();
            MoodAnalyzer analyseMood = MoodAnalyserFactory.createMoodAnalyser();
@@ -61,5 +60,14 @@ public class MoodAnalyzerTest {
        } catch (Exception e) {
            e.printStackTrace();
        }
+    }
+
+    @Test
+    public void givenMoodAnalyserClassName_WhenNotProper_ShouldThrowMoodAnalysisException() {
+        try {
+            MoodAnalyserFactory.getConstructor("MoodAnalyzer",String.class);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS_FOUND, e.type);
+        }
     }
 }
