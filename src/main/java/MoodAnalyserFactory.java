@@ -65,6 +65,8 @@ public class MoodAnalyserFactory {
     public static String invokeMoodAnalyser(MoodAnalyzer mood,String methodName) throws MoodAnalysisException {
         try {
             return (String) mood.getClass().getMethod(methodName).invoke(mood);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, "No such method found");
         } catch (Exception e) {
             e.printStackTrace();
         }

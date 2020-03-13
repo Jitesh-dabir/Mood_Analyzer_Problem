@@ -123,4 +123,19 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenMessageUsingReflection_WhenMethodImproper_ShouldThrowMoodAnalysisException() {
+
+        try {
+            Constructor constructor = MoodAnalyserFactory.getConstructor("MoodAnalyzer", String.class);
+            Object instance = constructor.newInstance("I am in happy mood");
+            String analyser = MoodAnalyserFactory.invokeMoodAnalyser((MoodAnalyzer)instance, "wrongMoodAnalyzer");
+            Assert.assertEquals("Happy",analyser);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, e.type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
