@@ -7,6 +7,5 @@ public class MoodAnalysisException extends Exception {
     MoodAnalysisException(MyException_Type type,String message) {
         super(message);
         this.type=type;
-        System.out.println(message);
     }
 }

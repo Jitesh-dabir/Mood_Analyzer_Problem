@@ -100,4 +100,13 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS_FOUND, e.type);
         }
     }
+
+    @Test
+    public void givenMoodAnalyserClassWithParameter_WhenConstructorImproper_ShouldThrowMoodAnalysisException() {
+        try {
+            MoodAnalyserFactory.getConstructor("MoodAnalyzer",Integer.class,"I am in happy mood");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, e.type);
+        }
+    }
 }
