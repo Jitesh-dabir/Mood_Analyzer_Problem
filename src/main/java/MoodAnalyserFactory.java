@@ -1,9 +1,10 @@
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory {
 
-    //RETURN CLASS OBJECT
+    //RETURN CLASS OBJECT (FOR DEFAULT CONSTRUCTOR)
     public static Constructor<?> getConstructor(String className,Class argument) throws MoodAnalysisException {
         try {
             Class<?> moodAnalyserClass = Class.forName(className);
@@ -13,6 +14,25 @@ public class MoodAnalyserFactory {
         } catch (NoSuchMethodException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, "No such method found");
         }
+    }
+
+    //RETURN CLASS OBJECT (FOR PARAMETER CONSTRUCTOR)
+    public static Object  getConstructor(String className, Class argument, String message) throws MoodAnalysisException {
+        try {
+            Constructor moodAnalyserClass = Class.forName(className).getConstructor(argument);
+            return moodAnalyserClass.newInstance(message);
+        } catch (ClassNotFoundException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS_FOUND, "No such class found");
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, "No such method found");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     //DEFAULT CONSTRUCTOR
@@ -40,4 +60,4 @@ public class MoodAnalyserFactory {
         }
         return null;
     }
-    }
+}

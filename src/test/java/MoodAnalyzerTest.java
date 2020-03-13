@@ -52,14 +52,14 @@ public class MoodAnalyzerTest {
 
     @Test
     public void givenMoodAnalyserClassNameDefaultConstructor_WhenProper_ShouldReturnObject()  {
-       try {
-           MoodAnalyzer mood = new MoodAnalyzer();
-           MoodAnalyzer analyseMood = MoodAnalyserFactory.createMoodAnalyser();
-           boolean resultMood = analyseMood.equals(mood);
-           Assert.assertEquals(true, resultMood);
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
+        try {
+            MoodAnalyzer mood = new MoodAnalyzer();
+            MoodAnalyzer analyseMood = MoodAnalyserFactory.createMoodAnalyser();
+            boolean resultMood = analyseMood.equals(mood);
+            Assert.assertEquals(true, resultMood);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -89,6 +89,15 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(true, resultMood);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyserClassNameWithParameter_WhenImproper_ShouldThrowMoodAnalysisException() {
+        try {
+            MoodAnalyserFactory.getConstructor("oodAnalyzer",String.class,"I am in happy mood");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS_FOUND, e.type);
         }
     }
 }
