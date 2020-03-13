@@ -79,4 +79,16 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, e.type);
         }
     }
+
+    @Test
+    public void givenMoodAnalyserClassNameParameterizedConstructor_WhenProper_ShouldReturnObject()  {
+        try {
+            MoodAnalyzer mood = new MoodAnalyzer("I am in happy mood");
+            MoodAnalyzer analyseMood = MoodAnalyserFactory.createMoodAnalyser("I am in happy mood");
+            boolean resultMood = analyseMood.equals(mood);
+            Assert.assertEquals(true, resultMood);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

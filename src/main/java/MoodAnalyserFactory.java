@@ -15,24 +15,27 @@ public class MoodAnalyserFactory {
         }
     }
 
+    //DEFAULT CONSTRUCTOR
     public static MoodAnalyzer createMoodAnalyser() {
         try {
-            //RETURN CLASS OBJECT
-            Class<?> moodAnalyzerClass = Class.forName("MoodAnalyzer");
-            //RETURN CONSTRUCTOR OBJECT
-            Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor();
+            Constructor<?> moodConstructor = Class.forName("MoodAnalyzer").getConstructor();
             //CONSTRUCTOR CLASS IS USED TO CREATE A NEW INSTANCE OF CLASS
             Object instance = moodConstructor.newInstance();
             return (MoodAnalyzer) instance;
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        }
+        return null;
+    }
+
+    //PARAMETERIZED CONSTRUCTOR
+    public static MoodAnalyzer createMoodAnalyser(String mood) {
+        try {
+            Constructor<?> moodConstructor = Class.forName("MoodAnalyzer").getConstructor(String.class);
+            //CONSTRUCTOR CLASS IS USED TO CREATE A NEW INSTANCE OF CLASS
+            Object instance = moodConstructor.newInstance(mood);
+            return (MoodAnalyzer) instance;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

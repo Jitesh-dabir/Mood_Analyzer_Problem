@@ -47,4 +47,5 @@ public class MoodAnalyzer {
         MoodAnalyzer that = (MoodAnalyzer) o;
         return Objects.equals(message, that.message);
     }
+
 }
