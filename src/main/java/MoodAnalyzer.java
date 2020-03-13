@@ -32,8 +32,10 @@ public class MoodAnalyzer {
             }
             if (message.contains("sad"))
                 return "Sad";
-            else
+            else if (message.contains("happy"))
                 return "Happy";
+            else
+                return null;
         } catch (NullPointerException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NULL, "You entered null,please enter valid mood");
         }
