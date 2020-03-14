@@ -21,7 +21,6 @@ public class MoodAnalyzer {
 
     public static void main(String[] args) throws MoodAnalysisException {
         System.out.println("Welcome to Mood Analyzer Problem");
-
     }
 
     //METHOD THAT RETURN THE MOOD OR THROW EXCEPTION
