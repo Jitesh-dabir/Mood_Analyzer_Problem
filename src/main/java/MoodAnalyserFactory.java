@@ -68,6 +68,8 @@ public class MoodAnalyserFactory {
             return (String) mood.getClass().getMethod(methodName).invoke(mood);
         } catch (NoSuchMethodException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, "No such method found");
+        } catch (NullPointerException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NULL, "No such method found");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,15 +79,19 @@ public class MoodAnalyserFactory {
     //SET METHOD THAT SET MOOD
     public static String setFieldMoodAnalyser(MoodAnalyzer mood,String fieldName,String fieldValue) throws MoodAnalysisException {
         try {
+            if (fieldValue == null)
+                throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NULL_VALUE, "Field value is Null");
             Field field = mood.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(mood,fieldValue);
         }catch (NoSuchFieldException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD, "No such field found");
-        }
-        catch (Exception e) {
+        }catch (MoodAnalysisException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NULL_VALUE, "No such field found");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
 }
