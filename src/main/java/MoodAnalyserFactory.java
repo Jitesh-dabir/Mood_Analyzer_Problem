@@ -1,5 +1,6 @@
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory {
@@ -19,7 +20,7 @@ public class MoodAnalyserFactory {
     //RETURN CLASS OBJECT (FOR PARAMETER CONSTRUCTOR)
     public static Object  getConstructor(String className, Class argument, String message) throws MoodAnalysisException {
         try {
-            Constructor moodAnalyserClass = Class.forName(className).getConstructor(argument);
+            Constructor<?> moodAnalyserClass = Class.forName(className).getConstructor(argument);
             return moodAnalyserClass.newInstance(message);
         } catch (ClassNotFoundException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS_FOUND, "No such class found");
@@ -65,7 +66,24 @@ public class MoodAnalyserFactory {
     public static String invokeMoodAnalyser(MoodAnalyzer mood,String methodName) throws MoodAnalysisException {
         try {
             return (String) mood.getClass().getMethod(methodName).invoke(mood);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD_FOUND, "No such method found");
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //SET METHOD THAT SET MOOD
+    public static String setFieldMoodAnalyser(MoodAnalyzer mood,String fieldName,String fieldValue) throws MoodAnalysisException {
+        try {
+            Field field = mood.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(mood,fieldValue);
+        }catch (NoSuchFieldException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD, "No such field found");
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         return null;

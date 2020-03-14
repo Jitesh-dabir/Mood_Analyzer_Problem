@@ -43,10 +43,10 @@ public class MoodAnalyzer {
 
     //CHECK IF BOTH OBJECTS ARE EQUAL
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MoodAnalyzer that = (MoodAnalyzer) o;
+    public boolean equals(Object secondObject) {
+        if (this == secondObject) return true;
+        if (secondObject == null || getClass() != secondObject.getClass()) return false;
+        MoodAnalyzer that = (MoodAnalyzer) secondObject;
         return Objects.equals(message, that.message);
     }
 
