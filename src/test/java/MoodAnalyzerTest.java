@@ -149,4 +149,16 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void setMessageField_WhenImproper_ShouldThrowMoodAnalysisException() {
+        try {
+            MoodAnalyzer moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
+            MoodAnalyserFactory.setFieldMoodAnalyser(moodAnalyser,"messge","I am in happy mood");
+            String moodResult = MoodAnalyserFactory.invokeMoodAnalyser( moodAnalyser, "moodAnalyzer");
+            Assert.assertEquals("Happy",moodResult);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD, e.type);
+        }
+    }
 }
